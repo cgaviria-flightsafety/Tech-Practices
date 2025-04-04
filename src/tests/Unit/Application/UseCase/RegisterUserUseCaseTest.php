@@ -19,13 +19,17 @@ class RegisterUserUseCaseTest extends TestCase
     public function testRegisterUser(): void
     {
         //Irrelevant
-            //Create USer
+            //Create User
         //Initial State
             //Parameters: name, email and password
         //Action
-            //Verify email.
-            //Save user
+            //Verify that the parameters are passed to the function
+            //Creates the object responsible for creating the user
+            //the function that the user will create is called
+            //Verify email. It is verified that the email address passed as a parameter does not exist. If it does, an exception will be returned.
+            //Save user. If the email does not exist, then the new user is created.
         //Outcome
+            //json with the user's ID, name and email
             //expected name: Christian
             //expected email: christian.gaviria@gmail.com
 
@@ -45,7 +49,20 @@ class RegisterUserUseCaseTest extends TestCase
 
     public function testRegisterUserWithExistingEmail(): void
     {
+        //Irrelevant
+            //Create User
+        //Initial State
+            //Parameters: name, email and password
+        //Action
+            //Verify that the parameters are passed to the function
+            //Creates the object responsible for creating the user
+            //the function that the user will create is called
+            //Verify email. It is verified that the email address passed as a parameter does not exist. If it does, an exception will be returned.
+        //Outcome
+            //expected Exception: Christian
+
         $this->expectException(UserAlreadyExistsException::class);
+        $this->expectExceptionMessage('A user with this email already exists');
 
         $existingUser = new User(
             new UserId(),

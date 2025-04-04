@@ -5,7 +5,6 @@ namespace App\Tests\Unit\Infrastructure\Controller;
 use App\Infrastructure\Controller\RegisterUserController;
 use App\Domain\Repository\UserRepositoryInterface;
 use PHPUnit\Framework\TestCase;
-use App\Shared\Exception\WeakPasswordException;
 
 class RegisterUserControllerTest extends TestCase
 {
