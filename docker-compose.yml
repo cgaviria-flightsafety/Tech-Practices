@@ -1,0 +1,36 @@
+services:
+  php:
+    container_name: php-service
+    build:
+      context: ./docker/php-apache2
+    volumes:
+      - .:/var/www/html
+      - ./public:/var/www/html/public
+    ports:
+      - "8181:80"
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-service
+    command: --default-authentication-plugin=mysql_native_password --sql-mode="NO_ENGINE_SUBSTITUTION"
+    environment:
+      MYSQL_ROOT_PASSWORD: passwordtest
+      MYSQL_DATABASE: testexample
+      MYSQL_USER: usertest
+      MYSQL_PASSWORD: passwordtest
+    volumes:
+      - ./storage-db:/var/lib/mysql #- ./docker/mysql/users.sql:/docker-entrypoint-initdb.d/users.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
